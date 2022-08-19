@@ -35360,5 +35360,3 @@ Author: rvt <rvt@c6892bbe-2a20-4548-a94f-41916fb2bb95>
 Date:   Mon Aug 16 12:32:23 2010 +0000
 
     Initial Import of CADuntu
-    
-    git-svn-id: https://librecad.svn.sourceforge.net/svnroot/librecad/trunk@1 c6892bbe-2a20-4548-a94f-41916fb2bb95

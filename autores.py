@@ -1,3 +1,5 @@
+import csv
+
 archivo = open("log.txt","r") 
 lineas = archivo.readlines()
 Autores = []
@@ -11,3 +13,9 @@ for texto in lineas:
 
 print(Autores)
 
+archivo_texto = open("autores.txt", "w")
+
+for autor in Autores:
+    archivo_texto.write(autor + "\n")
+    
+archivo_texto.close()

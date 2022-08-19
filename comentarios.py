@@ -1,32 +1,41 @@
-file = open("log.txt","r").read()
-lista=file.split("Author:")
-#print(lista[0:2])
-lista_coment = []
-for texto in lista[1:]:
-    var2 = texto.split("Date:")
-    var3 = var2[1]
-    var4 = var3.split('\n')
-    var5 = var4[1:]
-    sin_comentario = ''
-    for j in range(len(var5)):
-        if 'commit' in var5[j]:
-            #print(f'es el elmen xxxxxxx{var5[j]}, y el ant {var5[:j]}, todo es {var5}')
-            sin_comentario = var5[:j]
-    
-    if  sin_comentario !='':
-        lista_coment.append(''.join(sin_comentario))   
+
+import re
+
+def esComentario(linea):
+    if linea.find("commit") and linea.find("Author") and linea.find("Date"):
+            if re.search('[a-zA-Z]', texto):
+                return True  
+
+    return False
+
+archivo = open("log.txt","r") 
+lineas = archivo.readlines()
+Comentarios = []
+ultima = lineas[-1]
+for texto in lineas:
+        temp = []
+        if esComentario(texto):
+            temp.append(texto)
+            indice = lineas.index(texto)
+
+            while (texto != ultima and esComentario(lineas[indice+1])):
+                if lineas[indice+1] != '\n':
+                    temp.append(lineas[indice+1])
+                indice += 1
+
+        if len(temp) != 0:
+            Comentarios.append(temp)
+
+print(Comentarios)
+print(len(Comentarios))
+
+archivo_texto = open("comentarios.txt", "w")
+
+for comentario in Comentarios:
+    if isinstance(comentario, list):
+        for subelemento in comentario:
+            archivo_texto.write(subelemento + "\n")
     else:
-        lista_coment.append(''.join(var5))
-print(lista_coment)
-print(len(lista_coment))
-
-# Funcionando
-# file = open("log.txt","r").read()
-# lista=file.split("commit")
-# var = lista[56]
-# var2 = var.split("Date:")
-# var3 = var2[1]
-# var4 = var3.split('\n')
-# print(var4[2])
-
-
+        archivo_texto.write(comentario + "\n")
+    
+archivo_texto.close()

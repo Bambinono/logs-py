@@ -20,7 +20,13 @@ for texto in lineas:
 
 print(mails)
 
+archivo_texto = open("mails.txt", "w")
 
+for lista in mails:
+    for mail in lista:
+        archivo_texto.write(mail + "\n")
+    
+archivo_texto.close()
 
 
 
